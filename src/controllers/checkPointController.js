@@ -1,8 +1,14 @@
 const CheckPoint = require('../models/checkPointModel');
-const isReachable = require('is-reachable');
+const { validationResult } = require('express-validator/check');
+
 
 exports.add_new_checkPoint = async(req, res) => {
     try{
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(422).json(errors.array());
+        }
+
         let newCheckPoint = new CheckPoint({
             name: req.body.name,
             url: req.body.url,
@@ -33,6 +39,10 @@ exports.get_all_check_points_for_a_user = async(req, res) => {
 
 exports.update_a_checkPoint = async(req, res) => {
     try{
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(422).json(errors.array());
+        }
         let userCheckPoint = await CheckPoint.findOne({ userId: req.user._id, _id: req.params.checkPointId });
         if(!userCheckPoint){
             return res.status(404).json('No such check point');
@@ -52,6 +62,10 @@ exports.update_a_checkPoint = async(req, res) => {
 
 exports.delete_a_check_point = async(req, res) => {
     try{
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(422).json(errors.array());
+        }
         let deletedCheckPoint = await CheckPoint.findByIdAndDelete({ _id: req.params.checkPointId });
         return res.status(200).json('Check point deleted successfully');
     }catch(err){

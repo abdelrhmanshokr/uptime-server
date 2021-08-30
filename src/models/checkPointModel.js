@@ -7,11 +7,12 @@ const checkPointSchema = new mongoose.Schema({
     },
     name: {
         type: String,
+        required: true,
         trim: true
     }, 
     url: {
         type: String,
-        require: true,
+        required: true,
         trim: true
     },
     protocol: {
@@ -30,7 +31,7 @@ const checkPointSchema = new mongoose.Schema({
     },
     totalDownTime: {
         type: Number,
-        defualt: 0
+        default: 0
     },
     currentStatus: {
         type: Boolean

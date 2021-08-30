@@ -1,4 +1,6 @@
 const express = require("express");
+const expressValidator = require('express-validator');
+const bodyParser = require('body-parser');
 const dbConnect = require('./src/db/dbConnection');
 const userRouter = require('./src/routes/userRouter');
 const checkPointRouter = require('./src/routes/checkPointRouter');
@@ -9,6 +11,8 @@ dbConnect();
 
 
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(expressValidator());
 app.use('/api/users', userRouter);
 app.use('/api/checkPoints', checkPointRouter);
 

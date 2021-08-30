@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const checkPointController = require('../controllers/checkPointController');
+const checkPointValidation = require('../validation/checkPointValidation');
 const checkAuth = require('../middlewares/checkAuth');
 
 
-router.post('/', checkAuth, checkPointController.add_new_checkPoint);
+router.post('/', checkAuth, checkPointValidation.validate('add_new_checkPoint'), checkPointController.add_new_checkPoint);
 
 
 router.get('/allCheckPointsForAUser', checkAuth, checkPointController.get_all_check_points_for_a_user);
