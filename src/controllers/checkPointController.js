@@ -72,3 +72,25 @@ exports.delete_a_checkPoint = async(req, res) => {
         return res.status(500).json(err.message);
     }
 }
+
+
+exports.switch_a_checkPoint = async(req, res) => {
+    try{
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(422).json(errors.array());
+        }
+
+        let userCheckPoint = await CheckPoint.findOne({ userId: req.user._id, _id: req.params.checkPointId });
+        if(!userCheckPoint){
+            return res.status(404).json('No such check point');
+        }else{
+            console.log(userCheckPoint.active);
+            userCheckPoint.active = !userCheckPoint.active;
+            await userCheckPoint.save();
+            return res.status(200).json('Check point updated successfully');
+        }
+    }catch(err){
+        return res.status(500).json(err.message);
+    }
+}

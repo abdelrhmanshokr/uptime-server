@@ -35,6 +35,10 @@ const checkPointSchema = new mongoose.Schema({
     },
     currentStatus: {
         type: Boolean
+    },
+    active: {
+        type: Boolean,
+        default: 0
     }
 },{
     timestamps: true 

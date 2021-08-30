@@ -19,5 +19,10 @@ exports.validate = (method) => {
                 param('checkPointId', 'Check point Id is required').trim().not().isEmpty()
             ]
         }
+        case 'switch_a_checkPoint': {
+            return [
+                param('checkPointId', 'Check point Id is required').trim().not().isEmpty()
+            ]
+        }
     }
 }

@@ -14,6 +14,9 @@ router.get('/allCheckPointsForAUser', checkAuth, checkPointController.get_all_ch
 router.put('/updateACheckPoint/:checkPointId', checkAuth, checkPointValidation.validate('update_a_checkPoint'), checkPointController.update_a_checkPoint);
 
 
+router.put('/switchACheckPoint/:checkPointId', checkAuth, checkPointValidation.validate('switch_a_checkPoint'), checkPointController.switch_a_checkPoint);
+
+
 router.delete('/deleteACheckPoint/:checkPointId', checkAuth, checkPointValidation.validate('delete_a_checkPoint'), checkPointController.delete_a_checkPoint);
 
 
