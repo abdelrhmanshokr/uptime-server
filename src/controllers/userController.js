@@ -41,16 +41,6 @@ exports.user_signup = async(req, res) => {
                 }
                 return res.status(200).json('An email was sent please check your inbox');
             });
-             
-
-            // let hashedpassword = await bcrypt.hash(req.body.password, 10);
-            // let newUser = new User({
-            //     username: req.body.username,
-            //     email: req.body.email,
-            //     password: hashedpassword
-            // });
-            // await newUser.save();
-            // return res.status(201).json('User created successfully');
         }
     }catch(err){
         return res.status(400).json(err.message);
