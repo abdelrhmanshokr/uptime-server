@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const { validationResult } = require('express-validator/check');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const mailgun = require('mailgun-js');
@@ -9,6 +10,11 @@ require('dotenv').config();
 
 exports.user_signup = async(req, res) => {
     try{
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(422).json(errors.array());
+        }
+
         let user = await User.findOne({ email: req.body.email });
         if(user){
             return res.status(400).json(
@@ -50,6 +56,11 @@ exports.user_signup = async(req, res) => {
 
 exports.verify_account = async(req, res) => {
     try{
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(422).json(errors.array());
+        }
+
         const verificationToken = req.body.verificationToken;
         if(!verificationToken){
             return res.status(401).json('Token expired or invalid');
@@ -83,6 +94,11 @@ exports.verify_account = async(req, res) => {
 
 exports.user_login = async(req, res) => {
     try{
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(401).json(errors.array());
+        }
+
         let user = await User.findOne({ email: req.body.email });
         if(!user){
             return res.status(401).json('This email is not associated with any user');

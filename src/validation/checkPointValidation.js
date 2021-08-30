@@ -5,8 +5,8 @@ exports.validate = (method) => {
     switch (method){
         case 'add_new_checkPoint': {
             return [
-                body('name', 'Name is required').trim().not().isEmpty(),
-                body('url', 'Url is required').trim().not().isEmpty()
+                body('name', 'Name is required, And it can not start with an integer').trim().not().isInt().not().isEmpty(),
+                body('url', 'Url is required').trim().not().isInt().not().isEmpty()
             ]
         }
         case 'update_a_checkPoint': {
