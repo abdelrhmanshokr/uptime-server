@@ -1,4 +1,4 @@
-const { body } = require('express-validator/check');
+const { body, param } = require('express-validator/check');
 
 
 exports.validate = (method) => {
@@ -11,12 +11,12 @@ exports.validate = (method) => {
         }
         case 'update_a_checkPoint': {
             return [
-                params('checkPointId', 'Check point Id is required').trim().not().isEmpty()
+                param('checkPointId', 'Check point Id is required').trim().not().isEmpty()
             ]
         }
         case 'delete_a_checkPoint': {
             return [
-                params('checkPointId', 'Check point Id is required').trim().not().isEmpty()
+                param('checkPointId', 'Check point Id is required').trim().not().isEmpty()
             ]
         }
     }

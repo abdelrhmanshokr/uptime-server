@@ -11,10 +11,10 @@ router.post('/', checkAuth, checkPointValidation.validate('add_new_checkPoint'),
 router.get('/allCheckPointsForAUser', checkAuth, checkPointController.get_all_check_points_for_a_user);
 
 
-router.put('/updateACheckPoint/:checkPointId', checkAuth, checkPointController.update_a_checkPoint);
+router.put('/updateACheckPoint/:checkPointId', checkAuth, checkPointValidation.validate('update_a_checkPoint'), checkPointController.update_a_checkPoint);
 
 
-router.delete('/deleteACheckPoint/:checkPointId', checkAuth, checkPointController.delete_a_check_point);
+router.delete('/deleteACheckPoint/:checkPointId', checkAuth, checkPointValidation.validate('delete_a_checkPoint'), checkPointController.delete_a_checkPoint);
 
 
 module.exports = router;

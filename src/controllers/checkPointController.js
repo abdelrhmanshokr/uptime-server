@@ -60,7 +60,7 @@ exports.update_a_checkPoint = async(req, res) => {
 }
 
 
-exports.delete_a_check_point = async(req, res) => {
+exports.delete_a_checkPoint = async(req, res) => {
     try{
         const errors = validationResult(req);
         if(!errors.isEmpty()){
