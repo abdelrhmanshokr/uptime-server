@@ -9,11 +9,14 @@ const checkPointSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    }, 
+    },
     url: {
         type: String,
         required: true,
         trim: true
+    },
+    path: {
+        type: String
     },
     protocol: {
         type: String,
@@ -38,7 +41,13 @@ const checkPointSchema = new mongoose.Schema({
     },
     active: {
         type: Boolean,
-        default: 0
+        default: 1
+    },
+    tag: {
+        type: String
+    },
+    webhookUrl: {
+        type: String
     }
 },{
     timestamps: true 

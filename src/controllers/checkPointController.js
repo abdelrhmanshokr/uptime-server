@@ -1,5 +1,6 @@
 const CheckPoint = require('../models/checkPointModel');
 const { validationResult } = require('express-validator/check');
+const parser = require('url-parse');
 
 
 exports.add_new_checkPoint = async(req, res) => {
@@ -9,11 +10,16 @@ exports.add_new_checkPoint = async(req, res) => {
             return res.status(422).json(errors.array());
         }
 
+        let parsedUrl = parser(req.body.url, true);
         let newCheckPoint = new CheckPoint({
             name: req.body.name,
-            url: req.body.url,
-            protocol: req.body.protocol,
-            userId: req.user._id
+            userId: req.user._id,
+            tag: req.body.tag,
+            webhookUrl: req.body.webhookUrl,
+            url: parsedUrl.origin,
+            protocol: parsedUrl.protocol,
+            path: parsedUrl.pathname,
+            port: parsedUrl.port
         });
         await newCheckPoint.save();
         return res.status(201).json('New check has been added');
@@ -43,16 +49,18 @@ exports.update_a_checkPoint = async(req, res) => {
         if(!errors.isEmpty()){
             return res.status(422).json(errors.array());
         }
+
         let userCheckPoint = await CheckPoint.findOne({ userId: req.user._id, _id: req.params.checkPointId });
         if(!userCheckPoint){
             return res.status(404).json('No such check point');
         }else{
            userCheckPoint.url = req.body.name,
-           userCheckPoint.name = req.body.url 
+           userCheckPoint.name = req.body.url,
+           userCheckPoint.tag = req.body.tag,
+           userCheckPoint.webhookUrl = req.body.webhookUrl
         }
         await userCheckPoint.save();
         let updatedUserCheckPoint = await CheckPoint.findOne({ userId: req.user._id, _id: req.params.checkPointId });
-        console.log(updatedUserCheckPoint);
         return res.status(200).json('Check point updated successfully');
     }catch(err){
         return res.status(500).json(err.message);
@@ -74,7 +82,7 @@ exports.delete_a_checkPoint = async(req, res) => {
 }
 
 
-exports.switch_a_checkPoint = async(req, res) => {
+exports.pause_or_unpause_a_checkPoint = async(req, res) => {
     try{
         const errors = validationResult(req);
         if(!errors.isEmpty()){
@@ -85,7 +93,6 @@ exports.switch_a_checkPoint = async(req, res) => {
         if(!userCheckPoint){
             return res.status(404).json('No such check point');
         }else{
-            console.log(userCheckPoint.active);
             userCheckPoint.active = !userCheckPoint.active;
             await userCheckPoint.save();
             return res.status(200).json('Check point updated successfully');
