@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const checkPointController = require('../controllers/checkPointController');
-const checkPointValidation = require('../UserInputValidation/checkPointValidation');
+const checkPointValidation = require('../userInputValidation/checkPointValidation');
 const checkAuth = require('../middlewares/checkAuth');
 
 

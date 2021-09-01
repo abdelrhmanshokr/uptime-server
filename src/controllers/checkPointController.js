@@ -9,7 +9,7 @@ exports.add_new_checkPoint = async(req, res) => {
         if(!errors.isEmpty()){
             return res.status(422).json(errors.array());
         }
-
+        
         let parsedUrl = parser(req.body.url, true);
         let newCheckPoint = new CheckPoint({
             name: req.body.name,

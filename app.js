@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const dbConnect = require('./src/db/dbConnection');
 const userRouter = require('./src/routes/userRouter');
 const checkPointRouter = require('./src/routes/checkPointRouter');
+const reportRouter = require('./src/routes/reportRouter');
 
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 app.use(expressValidator());
 app.use('/api/users', userRouter);
 app.use('/api/checkPoints', checkPointRouter);
+app.use('/api/reports', reportRouter);
 
 
 const port= process.env.PORT || 4000;
