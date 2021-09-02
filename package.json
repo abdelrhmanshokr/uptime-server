@@ -21,6 +21,8 @@
     "mailgun-js": "^0.22.0",
     "mongoose": "^5.11.17",
     "server-reachability": "^1.1.15",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6",
     "url-parse": "^1.5.3",
     "validator": "^13.5.2"
   },

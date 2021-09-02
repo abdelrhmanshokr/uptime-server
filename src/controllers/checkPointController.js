@@ -136,7 +136,7 @@ exports.pause_or_unpause_a_checkPoint = async(req, res) => {
 
 exports.automatically_check_every_active_checkPoint = async(req, res) => {
     try{
-        console.log('automatically');
+        
         let activeCheckPoints = await CheckPoint.find({ active: true });
         for(activeCheckPoint of activeCheckPoints){
             let host = activeCheckPoint.url.split('//')[1];
