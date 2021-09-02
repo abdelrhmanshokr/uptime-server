@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 
 const checkPointSchema = new mongoose.Schema({
     userId: {
-        type: String
+        type: String,
+        required: true,
+        trim: true
     },
     name: {
         type: String,
@@ -36,8 +38,11 @@ const checkPointSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    currentStatus: {
-        type: Boolean
+    totalCheckCount: {
+        type: Number
+    },
+    totalDownCount: {
+        type: Number
     },
     active: {
         type: Boolean,

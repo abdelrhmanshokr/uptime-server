@@ -30,5 +30,10 @@ exports.validate = (method) => {
                 param('checkPointId', 'Check point Id is required').trim().not().isEmpty()
             ]
         }
+        case 'get_all_check_points_for_a_tag': {
+            return [
+                param('tag', 'Tag name is required').trim().not().isEmpty()
+            ]
+        }
     }
 }

@@ -5,6 +5,9 @@ const reportSchema = new mongoose.Schema({
     userId: {
         type: String
     },
+    checkPointId: {
+        type: String
+    },
     currentStatus: {
         type: Boolean,
         required: true
